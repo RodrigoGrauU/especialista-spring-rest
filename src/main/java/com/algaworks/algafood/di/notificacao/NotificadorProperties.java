@@ -14,8 +14,10 @@ public class NotificadorProperties {
 	
 	/**
 	 * Porta do servidor de e-mail
+	 * Caso não tenha nenhuma propriedade definida o application.properties,
+	 * o sistema está configurado para usar a porta 25
 	 */
-	private Integer portaServidor;
+	private Integer portaServidor = 25;
 	
 	//contem getters e setters
 	
