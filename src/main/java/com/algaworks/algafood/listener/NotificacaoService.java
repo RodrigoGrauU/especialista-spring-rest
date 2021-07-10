@@ -10,7 +10,7 @@ import com.algaworks.algafood.di.notificacao.Notificador;
 import com.algaworks.algafood.di.notificacao.TipoDoNotificador;
 import com.algaworks.algafood.di.service.ClienteAtivadoEvent;
 
-@Profile("prod")
+//@Profile("prod")
 @Component
 public class NotificacaoService {
 
