@@ -6,6 +6,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.algaworks.algafood.domain.model.Cozinha;
 
@@ -26,5 +27,16 @@ public class CadastroCozinha {
 		 * Utilizada JPQL para a consulta
 		 */
 		return manager.createQuery("from Cozinha", Cozinha.class).getResultList();
+	}
+	
+	/**
+	 * Persiste as informações do objeto no banco de dados e retorna o objeto com as informações persistida (se tiver
+	 * um id gerado, essa informação é retornada também)
+	 * @param cozinha
+	 * @return
+	 */
+	@Transactional
+	public Cozinha adicionar(Cozinha cozinha) {
+		return manager.merge(cozinha);
 	}
 }
