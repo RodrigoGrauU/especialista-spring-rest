@@ -1,6 +1,5 @@
 package com.algaworks.algafood.jpa;
 
-import java.util.List;
 
 import org.springframework.boot.WebApplicationType;
 import org.springframework.boot.builder.SpringApplicationBuilder;
@@ -9,7 +8,7 @@ import org.springframework.context.ApplicationContext;
 import com.algaworks.algafood.AlgafoodApiApplication;
 import com.algaworks.algafood.domain.model.Cozinha;
 
-public class InclusaoCozinhaMain {
+public class ExclusaoCozinhaMain {
 
 	public static void main(String[] args) {
 		/*
@@ -21,23 +20,9 @@ public class InclusaoCozinhaMain {
 		
 		CadastroCozinha cadastroCozinha = applicationContext.getBean(CadastroCozinha.class);
 		
+		Cozinha cozinha = new Cozinha();
+		cozinha.setId(1L);
 		
-		Cozinha cozinha1 = new Cozinha();
-		cozinha1.setNome("Brasileira");
-		
-		Cozinha cozinha2 = new Cozinha();
-		cozinha2.setId(1L);
-		cozinha2.setNome("Japonesa");
-		
-		cadastroCozinha.salvar(cozinha1);
-		cadastroCozinha.salvar(cozinha2);
-		
-		
-		List<Cozinha> cozinhas = cadastroCozinha.listar();
-		
-		for(Cozinha cozinha : cozinhas) {
-			System.out.println(cozinha.getNome());
-		}
-		
+		cadastroCozinha.remover(cozinha);
 	}
 }
