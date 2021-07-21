@@ -7,6 +7,7 @@ import org.springframework.context.ApplicationContext;
 
 import com.algaworks.algafood.AlgafoodApiApplication;
 import com.algaworks.algafood.domain.model.Cozinha;
+import com.algaworks.algafood.domain.repository.CozinhaRepository;
 
 public class BuscaCozinhaMain {
 
@@ -18,7 +19,7 @@ public class BuscaCozinhaMain {
 				.web(WebApplicationType.NONE) //informa para rodar a aplicação como não sendo web
 				.run(args); //passa os argumentos do método main
 		
-		CadastroCozinha cadastroCozinha = applicationContext.getBean(CadastroCozinha.class);
+		CozinhaRepository cadastroCozinha = applicationContext.getBean(CozinhaRepository.class);
 		
 		Cozinha cozinha = new Cozinha();
 		cozinha = cadastroCozinha.buscar(2L);
