@@ -1,5 +1,6 @@
-insert into cozinha(nome) values('Tailandesa');
-insert into cozinha(nome) values('Portuguesa');
+insert into cozinha(id, nome) values(1, 'Tailandesa');
+insert into cozinha(id, nome) values(2, 'Portuguesa');
 
-insert into restaurante(nome, taxa_frete) values('Sabor Azulino', 5.0);
-insert into restaurante(nome, taxa_frete) values('Comida Caseira', 2.0);
+insert into restaurante(nome, taxa_frete, id_cozinha) values('Sabor Azulino', 5.0, 1);
+insert into restaurante(nome, taxa_frete, id_cozinha) values('Comida Caseira', 2.0, 1);
+insert into restaurante(nome, taxa_frete, id_cozinha) values('Comida para Viagem', 1.0, 2);
