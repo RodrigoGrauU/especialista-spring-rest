@@ -9,19 +9,17 @@ import javax.persistence.Id;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-
-
-@Data //anotação contém @Getter, @Setter, @EqualsAndHashcode, ...
-@EqualsAndHashCode(onlyExplicitlyIncluded = true) //define que o equals e o hashcode considerado será apenas o que estiver com a anotação específica (ver Id)
+@Data
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Entity
-public class Cozinha {
+public class FormaPagamento {
 	
-	@EqualsAndHashCode.Include //necessário para ser considerado na comparação utilizando do equals e hashcode
 	@Id
+	@EqualsAndHashCode.Include
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
 	@Column(nullable = false)
-	private String nome;
+	private String descricao;
 	
 }
