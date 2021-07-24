@@ -15,3 +15,5 @@ insert into estado(nome) values('Manaus');
 insert into estado(nome) values('Pará');
 insert into estado(nome) values('Amapá');
 insert into estado(nome) values('Acre');
+
+insert into cidade(nome, estado_id) values('Castanhal', 2);
