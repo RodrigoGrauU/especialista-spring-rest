@@ -6,7 +6,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 
@@ -14,7 +13,8 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 
-//@JsonRootName("gastronomia")
+
+@JsonRootName("gastronomia")
 @Data //anotação contém @Getter, @Setter, @EqualsAndHashcode, ...
 @EqualsAndHashCode(onlyExplicitlyIncluded = true) //define que o equals e o hashcode considerado será apenas o que estiver com a anotação específica (ver Id)
 @Entity
