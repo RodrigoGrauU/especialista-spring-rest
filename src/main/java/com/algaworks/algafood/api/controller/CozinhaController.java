@@ -31,7 +31,7 @@ public class CozinhaController {
 	CozinhaRepository cozinhaRepository;
 	
 	@Autowired
-	CadastroCozinhaService CadastroCozinha;
+	CadastroCozinhaService cadastroCozinha;
 
 	@GetMapping
 	public List<Cozinha> listar() {
@@ -60,7 +60,7 @@ public class CozinhaController {
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED) //retorna o status 201
 	public Cozinha adicionar(@RequestBody Cozinha cozinha) {
-		return CadastroCozinha.salvar(cozinha);
+		return cadastroCozinha.salvar(cozinha);
 	}
 	
 	@PutMapping("/{cozinhaId}")
