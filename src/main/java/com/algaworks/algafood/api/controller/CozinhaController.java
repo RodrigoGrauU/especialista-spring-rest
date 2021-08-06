@@ -1,6 +1,7 @@
 package com.algaworks.algafood.api.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,15 +35,15 @@ public class CozinhaController {
 
 	@GetMapping
 	public List<Cozinha> listar() {
-		return cozinhaRepository.listar();
+		return cozinhaRepository.findAll();
 	}
 	
 	@GetMapping("/{cozinhaId}")
 	public ResponseEntity<Cozinha> buscar(@PathVariable Long cozinhaId) {
-		Cozinha cozinha = cozinhaRepository.buscar(cozinhaId);
+		Optional<Cozinha> cozinha = cozinhaRepository.findById(cozinhaId);
 		
-		if(cozinha != null) {
-			return ResponseEntity.ok(cozinha);
+		if(cozinha.isPresent()) {
+			return ResponseEntity.ok(cozinha.get());
 		}
 		
 		//return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
@@ -59,14 +60,14 @@ public class CozinhaController {
 	
 	@PutMapping("/{cozinhaId}")
 	public ResponseEntity<Cozinha> atualizar(@RequestBody Cozinha cozinha, @PathVariable Long cozinhaId) {
-		Cozinha cozinhaAtual = cozinhaRepository.buscar(cozinhaId);
-		if(cozinhaAtual != null) {
+		Optional<Cozinha> cozinhaAtual = cozinhaRepository.findById(cozinhaId);
+		if(cozinhaAtual.isPresent()) {
 			//cozinhaAtual.setNome(cozinha.getNome()); 
 			
 			//Utilizando para copiar propriedade e evitar código como o comentado acima
-			BeanUtils.copyProperties(cozinha, cozinhaAtual, "id");
-			cozinhaAtual = cadastroCozinha.salvar(cozinhaAtual);
-			return ResponseEntity.ok(cozinhaAtual); 
+			BeanUtils.copyProperties(cozinha, cozinhaAtual.get(), "id");
+			Cozinha cozinhaSalva = cadastroCozinha.salvar(cozinhaAtual.get());
+			return ResponseEntity.ok(cozinhaSalva); 
 		}
 		return ResponseEntity.notFound().build();
 	}
