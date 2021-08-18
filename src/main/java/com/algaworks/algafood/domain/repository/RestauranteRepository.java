@@ -28,4 +28,6 @@ public interface RestauranteRepository extends JpaRepository<Restaurante, Long> 
 	List<Restaurante> restaurantePorTaxaFrete(@Param("taxa") BigDecimal taxaFrete);
 	
 	Optional<Restaurante> consultaPorNome(@Param("nome") String nome, @Param("id") Long idCozinha);
+	
+	public List<Restaurante> find(@Param("nome") String nome, @Param("taxaInicial") BigDecimal taxaInicial, @Param("taxaFinal") BigDecimal taxaFinal);
 }
