@@ -27,4 +27,5 @@ public interface RestauranteRepository extends JpaRepository<Restaurante, Long> 
 	@Query("from Restaurante where taxaFrete = :taxa")
 	List<Restaurante> restaurantePorTaxaFrete(@Param("taxa") BigDecimal taxaFrete);
 	
+	Optional<Restaurante> consultaPorNome(@Param("nome") String nome, @Param("id") Long idCozinha);
 }
