@@ -1,6 +1,7 @@
 package com.algaworks.algafood.infrastructure.repository;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.criteria.Predicate;
 
@@ -12,6 +13,7 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
 import org.springframework.stereotype.Repository;
+import org.springframework.util.StringUtils;
 
 import com.algaworks.algafood.domain.model.Restaurante;
 
@@ -29,15 +31,24 @@ public class RestauranteRepositoryImpl implements RestauranteRepositoryQueries {
 		CriteriaQuery<Restaurante> criteria = builder.createQuery(Restaurante.class);
 		Root<Restaurante> root = criteria.from(Restaurante.class);
 		
+		var predicates = new ArrayList<Predicate>();
+		
 		//construíndo o Predicate para a consulta
-		Predicate nomePredicate = builder.like(root.get("nome"), "%" + nome + "%");
+		if(StringUtils.hasText(nome)) {
+			predicates.add(builder.like(root.get("nome"), "%" + nome + "%"));
+		}
 		
-		Predicate taxaInicialPredicate = builder.greaterThanOrEqualTo(root.get("taxaFrete"), taxaInicial);
-		
-		Predicate taxaFinalPredicate = builder.lessThanOrEqualTo(root.get("taxaFrete"), taxaFinal);
+		if(taxaInicial != null) {
+			predicates.add(builder.greaterThanOrEqualTo(root.get("taxaFrete"), taxaInicial));
+		} 
+
+		if(taxaFinal != null) {
+			predicates.add(builder.lessThanOrEqualTo(root.get("taxaFrete"), taxaFinal));
+		}
 		
 		//aceita Predicate... retrictions. Faz o AND de cada predicate passado como parâmetro
-		criteria.where(nomePredicate, taxaInicialPredicate, taxaFinalPredicate);
+		//Para consulta dinâmica, na estratégia adotada, é necessário transformar a List para Array
+		criteria.where(predicates.toArray(new Predicate[0]));
 		
 		TypedQuery<Restaurante> query = manager.createQuery(criteria);
 		return query.getResultList();
