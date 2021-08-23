@@ -14,6 +14,8 @@ import com.algaworks.algafood.domain.model.Cozinha;
 import com.algaworks.algafood.domain.model.Restaurante;
 import com.algaworks.algafood.domain.repository.CozinhaRepository;
 import com.algaworks.algafood.domain.repository.RestauranteRepository;
+import com.algaworks.algafood.infrastructure.repository.spec.RestauranteComFreteGratisSpec;
+import com.algaworks.algafood.infrastructure.repository.spec.RestauranteComNomeSemelhanteSpec;
 
 @RestController
 @RequestMapping("/teste")
@@ -41,14 +43,15 @@ public class TesteController {
 	}
 	
 	
-	@GetMapping("/restaurantes/por-taxa-frete")
-	public List<Restaurante> taxaFreteRestauranteEntre(BigDecimal taxaInicial, BigDecimal taxaFinal) {
-		return restauranteRepository.findByTaxaFreteBetween(taxaInicial, taxaFinal);
-	}
+//	@GetMapping("/restaurantes/por-taxa-frete")
+//	public List<Restaurante> taxaFreteRestauranteEntre(BigDecimal taxaInicial, BigDecimal taxaFinal) {
+//		return restauranteRepository.findByTaxaFreteBetween(taxaInicial, taxaFinal);
+//	}
 	
 	@GetMapping("/restaurantes/por-nome-id")
-	public List<Restaurante> restaurantePorNomeECozinhaId(String nome, Long cozinhaId) {
-		return restauranteRepository.findByNomeContainingAndCozinhaId(nome, cozinhaId);
+	public Optional<Restaurante> restaurantePorNomeECozinhaId(String nome, Long cozinhaId) {
+		//return restauranteRepository.findByNomeContainingAndCozinhaId(nome, cozinhaId);
+		return restauranteRepository.consultaPorNome(nome, cozinhaId);
 	}
 	
 	@GetMapping("/restaurantes/primeiro-por-nome")
@@ -69,5 +72,17 @@ public class TesteController {
 	@GetMapping("/restaurantes/taxa-frete")
 	public List<Restaurante> porDeterminadaTaxaFrete(BigDecimal taxa) {
 		return restauranteRepository.restaurantePorTaxaFrete(taxa);
+	}
+	
+	@GetMapping("/restaurantes/por-taxa-frete")
+	public List<Restaurante> restaurantesPorTaxafrete(String nome, BigDecimal taxaInicial, BigDecimal taxaFinal) {
+		return restauranteRepository.find(nome, taxaInicial, taxaFinal);
+	}
+	
+	@GetMapping("restaurantes/com-frete-gratis")
+	public List<Restaurante> restaurantesComFreteGratis(String nome) {
+		var comFreteGratis = new RestauranteComFreteGratisSpec();
+		var comNomeSemelhante = new RestauranteComNomeSemelhanteSpec(nome);
+		return restauranteRepository.findAll(comFreteGratis.and(comNomeSemelhante));
 	}
 }
