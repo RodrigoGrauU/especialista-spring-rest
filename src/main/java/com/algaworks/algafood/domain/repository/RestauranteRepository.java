@@ -14,7 +14,7 @@ import com.algaworks.algafood.domain.model.Restaurante;
 import com.algaworks.algafood.infrastructure.repository.RestauranteRepositoryQueries;
 
 @Repository
-public interface RestauranteRepository extends JpaRepository<Restaurante, Long>, RestauranteRepositoryQueries,
+public interface RestauranteRepository extends JpaRepository<Restaurante, Long>, RestauranteRepositoryQueries, CustomJpaRepository<Restaurante, Long>,
 	JpaSpecificationExecutor<Restaurante> //preparando interface para receber specifications
 {
 	  
