@@ -23,4 +23,4 @@ insert into restaurante_forma_pagamento (restaurante_id, forma_pagamento_id) val
 insert into restaurante_forma_pagamento (restaurante_id, forma_pagamento_id) values (1, 3);
 insert into restaurante_forma_pagamento (restaurante_id, forma_pagamento_id) values (2, 1);
 insert into restaurante_forma_pagamento (restaurante_id, forma_pagamento_id) values (3, 1);
-insert into restaurante_forma_pagamento (restaurante_id, forma_pagamento_id) values (3,2);
+insert into restaurante_forma_pagamento (restaurante_id, forma_pagamento_id) values (3, 2);
