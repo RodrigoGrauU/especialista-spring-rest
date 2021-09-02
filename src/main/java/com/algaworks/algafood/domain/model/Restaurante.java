@@ -66,7 +66,7 @@ public class Restaurante {
 	private Endereco endereco;
 	
 	@JsonIgnore
-	@ManyToMany
+	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "restaurante_forma_pagamento", //nome da table que faz a associação
 		joinColumns = @JoinColumn(name = "restaurante_id"), //nome da coluna referente a restaurante
 		inverseJoinColumns = @JoinColumn(name = "forma_pagamento_id")) //nome da coluna referente a forma de pagamento
