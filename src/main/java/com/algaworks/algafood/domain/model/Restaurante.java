@@ -8,6 +8,7 @@ import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -54,9 +55,10 @@ public class Restaurante {
 	@Column(name = "taxa_frete", nullable = false)
 	private BigDecimal taxaFrete;
 
-	//@JsonIgnore
+	//@JsonIgnoreProperties("hibernateLazyInitializer")
+	@JsonIgnore
 	@JoinColumn(name = "id_cozinha", nullable = false)
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	private Cozinha cozinha;
 	
 	@JsonIgnore
