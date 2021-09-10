@@ -57,7 +57,7 @@ public class Restaurante {
 
 	//@JsonIgnoreProperties("hibernateLazyInitializer")
 	//@JsonIgnore
-	@JoinColumn(name = "id_cozinha", nullable = false)
+	@JoinColumn(name = "cozinha_id", nullable = false)
 	@ManyToOne(fetch = FetchType.LAZY)
 	private Cozinha cozinha;
 	
