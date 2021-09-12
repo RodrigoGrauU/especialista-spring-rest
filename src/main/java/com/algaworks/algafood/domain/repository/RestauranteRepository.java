@@ -17,7 +17,7 @@ import com.algaworks.algafood.infrastructure.repository.RestauranteRepositoryQue
 public interface RestauranteRepository extends JpaRepository<Restaurante, Long>, RestauranteRepositoryQueries, CustomJpaRepository<Restaurante, Long>,
 	JpaSpecificationExecutor<Restaurante> //preparando interface para receber specifications
 {
-	@Query("from Restaurante r join fetch r.cozinha left join fetch r.formasPagamento")
+	@Query("from Restaurante r join fetch r.cozinha")
 	List<Restaurante> findAll();  
 	
 	List<Restaurante> findByTaxaFreteBetween(BigDecimal taxaInicial, BigDecimal taxaFinal);
