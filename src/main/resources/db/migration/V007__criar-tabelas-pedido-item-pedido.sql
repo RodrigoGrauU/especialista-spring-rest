@@ -1,6 +1,7 @@
 create table pedido(
 	id bigint not null auto_increment,
 	subtotal decimal(10,2) not null,
+	taxa_frete decimal(10,2) not null,
 	valor_total decimal(10,2) not null,
 
 	data_criacao datetime not null,
@@ -8,12 +9,12 @@ create table pedido(
 	data_cancelamento datetime null,
 	data_entrega datetime null,
 
-	endereco_cep varchar(80) not null,
-	endereco_logradouro varchar(80) not null,
+	endereco_cep varchar(9) not null,
+	endereco_logradouro varchar(100) not null,
 	endereco_numero varchar(10) not null,
  	endereco_complemento varchar(80) null,
 	endereco_bairro varchar(60) not null,
-	endereco_cidade_id bigint not null,
+	endereco_cidade_id bigint(60) not null,
 
 	forma_pagamento_id bigint not null,
 	restaurante_id bigint not null,
