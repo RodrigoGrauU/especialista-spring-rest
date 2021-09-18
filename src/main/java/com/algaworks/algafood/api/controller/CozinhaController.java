@@ -39,17 +39,8 @@ public class CozinhaController {
 	}
 	
 	@GetMapping("/{cozinhaId}")
-	public ResponseEntity<Cozinha> buscar(@PathVariable Long cozinhaId) {
-		Optional<Cozinha> cozinha = cozinhaRepository.findById(cozinhaId);
-		
-		if(cozinha.isPresent()) {
-			return ResponseEntity.ok(cozinha.get());
-		}
-		
-		//return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-		
-		//atalho para o código acima
-		return ResponseEntity.notFound().build();
+	public Cozinha buscar(@PathVariable Long cozinhaId) {
+		return cadastroCozinha.buscarOuFalhar(cozinhaId);
 	}
 	
 	@PostMapping
@@ -59,17 +50,13 @@ public class CozinhaController {
 	}
 	
 	@PutMapping("/{cozinhaId}")
-	public ResponseEntity<Cozinha> atualizar(@RequestBody Cozinha cozinha, @PathVariable Long cozinhaId) {
-		Optional<Cozinha> cozinhaAtual = cozinhaRepository.findById(cozinhaId);
-		if(cozinhaAtual.isPresent()) {
-			//cozinhaAtual.setNome(cozinha.getNome()); 
-			
-			//Utilizando para copiar propriedade e evitar código como o comentado acima
-			BeanUtils.copyProperties(cozinha, cozinhaAtual.get(), "id");
-			Cozinha cozinhaSalva = cadastroCozinha.salvar(cozinhaAtual.get());
-			return ResponseEntity.ok(cozinhaSalva); 
-		}
-		return ResponseEntity.notFound().build();
+	public Cozinha atualizar(@RequestBody Cozinha cozinha, @PathVariable Long cozinhaId) {
+		Cozinha cozinhaAtual = cadastroCozinha.buscarOuFalhar(cozinhaId);
+		
+		//Utilizando para copiar propriedade e evitar código como o comentado acima
+		BeanUtils.copyProperties(cozinha, cozinhaAtual, "id");
+		Cozinha cozinhaSalva = cadastroCozinha.salvar(cozinhaAtual);
+		return cozinhaSalva;
 	}
 	
 	@DeleteMapping("/{cozinhaId}")
