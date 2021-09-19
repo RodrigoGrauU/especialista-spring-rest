@@ -13,6 +13,10 @@ import com.algaworks.algafood.domain.repository.EstadoRepository;
 @Service
 public class CadastroEstadoService {
 
+	private static final String MSG_ENTIDADE_EM_USO = "A entidade estado de id %d não pode ser removida pois há"
+			+ " registros associados a ela na base de dados";
+	private static final String MSG_ENTIDADE_NAO_ENCONTRADA = "A entidade estado de id %d não existe";
+	
 	@Autowired
 	EstadoRepository estadoRepository;
 	
@@ -23,15 +27,18 @@ public class CadastroEstadoService {
 	public void excluir(Long estadoId) {
 		try {
 			estadoRepository.deleteById(estadoId);
+			
 		} catch (EmptyResultDataAccessException e) {
 			throw new EntidadeNaoEncontradaException(
-					String.format("A entidade estado de id %d não existe", estadoId));
+					String.format(MSG_ENTIDADE_NAO_ENCONTRADA, estadoId));
 			
 		} catch (DataIntegrityViolationException e) {
 			throw new EntidadeEmUsoException(
-					String.format("A entidade estado de id %d não pode ser removida pois há"
-							+ " registros associados a ela na base de dados", estadoId));
+					String.format(MSG_ENTIDADE_EM_USO, estadoId));
 		}
-		
+	}
+	
+	public Estado buscarOuFalhar(Long estadoId) {
+		return estadoRepository.findById(estadoId).orElseThrow(() -> new EntidadeNaoEncontradaException(String.format(MSG_ENTIDADE_NAO_ENCONTRADA, estadoId)));
 	}
 }
