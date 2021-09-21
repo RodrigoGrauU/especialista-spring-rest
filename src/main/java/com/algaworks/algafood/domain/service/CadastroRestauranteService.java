@@ -11,7 +11,7 @@ import com.algaworks.algafood.domain.repository.RestauranteRepository;
 @Service
 public class CadastroRestauranteService {
 	
-	private final String MSG_ENTIDADE_NAO_ENCONTRADA = "Não foi encontrada entidade cozinha com id igual a %d";
+	private final String MSG_RESTAURANTE_NAO_ENCONTRADO = "Não foi encontrada entidade restaurante com id igual a %d";
 	
 	@Autowired
 	private RestauranteRepository restauranteRepository;
@@ -22,7 +22,6 @@ public class CadastroRestauranteService {
 	public Restaurante salvar(Restaurante restaurante) {
 		Long cozinhaId = restaurante.getCozinha().getId();
 		Cozinha cozinha = cozinhaService.buscarOuFalhar(cozinhaId);
-		
 		restaurante.setCozinha(cozinha);
 			
 		return restauranteRepository.save(restaurante);
@@ -30,6 +29,6 @@ public class CadastroRestauranteService {
 	
 	public Restaurante buscarOuFalhar(Long cidadeId) {
 		return restauranteRepository.findById(cidadeId)
-				.orElseThrow(() -> new EntidadeNaoEncontradaException(String.format(MSG_ENTIDADE_NAO_ENCONTRADA, cidadeId)));
+				.orElseThrow(() -> new EntidadeNaoEncontradaException(String.format(MSG_RESTAURANTE_NAO_ENCONTRADO, cidadeId)));
 	}
 }
