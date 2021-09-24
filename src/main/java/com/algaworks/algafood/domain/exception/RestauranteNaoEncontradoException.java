@@ -1,9 +1,5 @@
 package com.algaworks.algafood.domain.exception;
 
-import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.ResponseStatus;
-
-@ResponseStatus(value = HttpStatus.NOT_FOUND)
 public class RestauranteNaoEncontradoException extends EntidadeNaoEncontradaException {
 	private static final String MSG_RESTAURANTE_NAO_ENCONTRADO = "A entidade restaurante de id %d não existe";
 	
