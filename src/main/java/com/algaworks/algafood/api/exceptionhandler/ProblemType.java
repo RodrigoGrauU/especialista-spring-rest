@@ -9,7 +9,8 @@ public enum ProblemType {
 	RECURSO_NAO_ENCONTRADO("/recurso-nao-encontrado", "Recurso não encontrado"), 
 	ERRO_NEGOCIO("/erro-negocio", "Violação da regra de negócio"), 
 	ENTIDADE_EM_USO("/entidade-em-uso", "Entidade em uso"), 
-	ERRO_DE_SISTEMA("/erro-de-sistema", "Erro de sistema");
+	ERRO_DE_SISTEMA("/erro-de-sistema", "Erro de sistema"), 
+	DADOS_INVALIDOS("/dados-invalidos", "Dados inválidos");
 	
 	private String path;
 	private String title;
