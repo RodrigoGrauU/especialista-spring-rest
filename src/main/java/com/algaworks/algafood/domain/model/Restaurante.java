@@ -25,6 +25,7 @@ import javax.validation.constraints.PositiveOrZero;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
+import com.algaworks.algafood.Groups;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 //import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -43,7 +44,7 @@ public class Restaurante {
 	
 //	@NotNull
 //	@NotEmpty
-	@NotBlank
+	@NotBlank(groups = Groups.CadastroRestaurante.class)
 	@Column(nullable = false)
 	private String nome;
 	
@@ -60,12 +61,12 @@ public class Restaurante {
 	private LocalDateTime dataAtualizacao;
 	
 //	@DecimalMin("0")
-	@PositiveOrZero
+	@PositiveOrZero(groups = Groups.CadastroRestaurante.class)
 	@Column(name = "taxa_frete", nullable = false)
 	private BigDecimal taxaFrete;
 
 	@Valid
-	@NotNull
+	@NotNull(groups = Groups.CadastroRestaurante.class)
 	//@JsonIgnoreProperties("hibernateLazyInitializer")
 	//@JsonIgnore
 	@JoinColumn(name = "cozinha_id", nullable = false)

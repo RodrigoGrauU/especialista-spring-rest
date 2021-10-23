@@ -3,6 +3,7 @@ package com.algaworks.algafood.domain.model;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
+import com.algaworks.algafood.Groups;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonRootName;
 
@@ -19,7 +20,7 @@ import java.util.List;
 @Entity
 public class Cozinha {
 	
-	@NotNull
+	@NotNull(groups = Groups.CadastroRestaurante.class)
 	@EqualsAndHashCode.Include //necessário para ser considerado na comparação utilizando do equals e hashcode
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
