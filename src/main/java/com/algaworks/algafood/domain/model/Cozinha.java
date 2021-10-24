@@ -1,6 +1,7 @@
 package com.algaworks.algafood.domain.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 import com.algaworks.algafood.Groups;
@@ -26,6 +27,7 @@ public class Cozinha {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
+	@NotBlank
 	//@JsonIgnore
 	//@JsonProperty("titulo")
 	@Column(nullable = false)
