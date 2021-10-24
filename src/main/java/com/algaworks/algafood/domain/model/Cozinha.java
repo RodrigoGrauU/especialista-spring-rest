@@ -20,7 +20,7 @@ import java.util.List;
 @Entity
 public class Cozinha {
 	
-	@NotNull(groups = Groups.CadastroRestaurante.class)
+	@NotNull(groups = Groups.CozinhaId.class)
 	@EqualsAndHashCode.Include //necessário para ser considerado na comparação utilizando do equals e hashcode
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
