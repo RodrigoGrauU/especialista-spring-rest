@@ -222,12 +222,18 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
 		ProblemType problemType = ProblemType.DADOS_INVALIDOS;
 		String detail = "Um ou mais campos estão inválidos. Faça o preenchimento correto e tente novamente.";
 		
-		List<Problem.Field> problemFields = ex.getBindingResult().getFieldErrors().stream()
-				.map(fieldError -> {
-					String message = messageSource.getMessage(fieldError, LocaleContextHolder.getLocale());
+		List<Problem.Object> problemFields = ex.getBindingResult().getAllErrors().stream()
+				.map(objectError -> {
+					String message = messageSource.getMessage(objectError, LocaleContextHolder.getLocale());
 					
-					return Problem.Field.builder()
-					.name(fieldError.getField())
+					String name = objectError.getObjectName();
+					
+					if(objectError instanceof FieldError) {
+						name = ((FieldError) objectError).getField();
+					}
+					
+					return Problem.Object.builder()
+					.name(name)
 					.userMessage(message)
 					.build();
 				})	
@@ -236,7 +242,7 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
 		Problem problem = createProblemBuilder(status, problemType, detail)
 				.userMessage(detail)
 				.timestamp(LocalDateTime.now())
-				.fields(problemFields)
+				.objects(problemFields)
 				.build();
 		
 		return super.handleExceptionInternal(ex, problem, headers, status, request);
