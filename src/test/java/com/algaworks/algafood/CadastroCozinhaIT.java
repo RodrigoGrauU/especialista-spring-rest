@@ -22,7 +22,7 @@ import com.algaworks.algafood.domain.service.CadastroRestauranteService;
 
 @ExtendWith(SpringExtension.class) //fornece suporte para carregar um contexto do spring para utilização do recurso do framework no teste
 @SpringBootTest //fornece funcionalidade do spring boot nos testes
-public class CadastroCozinhaIntegrationTests {
+public class CadastroCozinhaIT {
 
 	@Autowired
 	private CadastroCozinhaService cadastroCozinha;
