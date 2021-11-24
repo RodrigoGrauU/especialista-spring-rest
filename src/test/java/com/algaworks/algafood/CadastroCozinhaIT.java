@@ -3,9 +3,11 @@ package com.algaworks.algafood;
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.hasSize;
 
+import org.flywaydb.core.Flyway;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.http.HttpStatus;
@@ -21,12 +23,15 @@ public class CadastroCozinhaIT {
 	@LocalServerPort //injeção da RANDOM_PORT
 	private int port;
 	
+	@Autowired
+	private Flyway flyway;
+	
 	@BeforeEach
 	public void setUp() {
 		RestAssured.enableLoggingOfRequestAndResponseIfValidationFails(); // habilita log importante para debug
 		RestAssured.port = port;
 		RestAssured.basePath = "/cozinhas";
-		
+		flyway.migrate();
 	}
 	
 	@Test
