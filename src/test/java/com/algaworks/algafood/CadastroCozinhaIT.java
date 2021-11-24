@@ -3,6 +3,7 @@ package com.algaworks.algafood;
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.hasSize;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -10,6 +11,7 @@ import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.http.HttpStatus;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 
 @ExtendWith(SpringExtension.class) //fornece suporte para carregar um contexto do spring para utilização do recurso do framework no teste
@@ -19,12 +21,17 @@ public class CadastroCozinhaIT {
 	@LocalServerPort //injeção da RANDOM_PORT
 	private int port;
 	
+	@BeforeEach
+	public void setUp() {
+		RestAssured.enableLoggingOfRequestAndResponseIfValidationFails(); // habilita log importante para debug
+		RestAssured.port = port;
+		RestAssured.basePath = "/cozinhas";
+		
+	}
+	
 	@Test
 	public void deveRetornarStatus200_QuandoConsultarCozinhas() {
-		//RestAssured.enableLoggingOfRequestAndResponseIfValidationFails(); habilita log importante para debug
 		given()
-			.basePath("/cozinhas")
-			.port(port)
 			.accept(ContentType.JSON)
 		.when()
 			.get()
@@ -35,8 +42,6 @@ public class CadastroCozinhaIT {
 	@Test
 	public void deveconter4Cozinhas_QuandoConsultarCozinhas() {
 		given()
-			.basePath("/cozinhas")
-			.port(port)
 			.accept(ContentType.JSON)
 		.when()
 			.get()
