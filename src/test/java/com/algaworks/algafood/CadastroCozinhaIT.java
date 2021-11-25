@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.http.HttpStatus;
+import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import io.restassured.RestAssured;
@@ -18,6 +19,7 @@ import io.restassured.http.ContentType;
 
 @ExtendWith(SpringExtension.class) //fornece suporte para carregar um contexto do spring para utilização do recurso do framework no teste
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT) //fornece funcionalidade do spring boot nos testes
+@TestPropertySource("/application-test.properties")
 public class CadastroCozinhaIT {
 
 	@LocalServerPort //injeção da RANDOM_PORT
