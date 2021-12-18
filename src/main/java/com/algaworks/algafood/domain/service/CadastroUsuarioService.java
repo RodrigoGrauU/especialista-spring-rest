@@ -1,5 +1,7 @@
 package com.algaworks.algafood.domain.service;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,6 +19,15 @@ public class CadastroUsuarioService {
     
     @Transactional
     public Usuario salvar(Usuario usuario) {
+    	//necessário para que o JPA não sincronize as informações ao utilizar o ifPresent.
+    	//caso fossem sincronizadas as informações, seria dois resultados retornados na utilização do findByEmail,
+    	//o que resultaria em um erro
+    	usuarioRepository.detach(usuario);
+    	Optional<Usuario> usuarioExistente = usuarioRepository.findByEmail(usuario.getEmail());
+    	if(usuarioExistente.isPresent() && !usuarioExistente.get().getId().equals(usuario)) {
+    		throw new NegocioException(String.format("Já existe um usuário cadastrado com o e-mail %s", usuario.getEmail()));
+    	}
+    	
         return usuarioRepository.save(usuario);
     }
     

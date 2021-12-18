@@ -27,4 +27,7 @@ public class CustomJpaRepositoryImpl<T, ID> extends SimpleJpaRepository<T, ID> {
 		return Optional.ofNullable(entity);
 	}
 	
+	public void detach(T entity) {
+		manager.detach(entity);
+	}
 }
