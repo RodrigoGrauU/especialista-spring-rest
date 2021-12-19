@@ -1,13 +1,17 @@
 package com.algaworks.algafood.domain.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.algaworks.algafood.domain.exception.NegocioException;
 import com.algaworks.algafood.domain.exception.RestauranteNaoEncontradoException;
 import com.algaworks.algafood.domain.model.Cidade;
 import com.algaworks.algafood.domain.model.Cozinha;
 import com.algaworks.algafood.domain.model.FormaPagamento;
+import com.algaworks.algafood.domain.model.Produto;
 import com.algaworks.algafood.domain.model.Restaurante;
 import com.algaworks.algafood.domain.repository.RestauranteRepository;
 
@@ -25,6 +29,9 @@ public class CadastroRestauranteService {
 	
 	@Autowired
 	private CadastroFormaPagamentoService cadastroFormaPagamento;
+	
+	@Autowired
+	private CadastroProdutoService cadastroProduto;
 	
 	@Transactional
 	public Restaurante salvar(Restaurante restaurante) {
@@ -69,5 +76,20 @@ public class CadastroRestauranteService {
 	
 	public Restaurante buscarOuFalhar(Long restauranteId) {
 		return restauranteRepository.findById(restauranteId).orElseThrow(() -> new RestauranteNaoEncontradoException(restauranteId));
+	}
+
+	public List<Produto> listarProdutos(Long restauranteId) {
+		Restaurante restaurante = buscarOuFalhar(restauranteId);
+		return restaurante.getProdutos();
+	}
+
+	public Produto buscaProduto(Long restauranteId, Long produtoId) {
+		Restaurante restaurante = buscarOuFalhar(restauranteId);
+		Produto produto = cadastroProduto.buscarOuFalhar(restauranteId, produtoId);
+		if(!restaurante.getProdutos().contains(produto)) {
+			throw new NegocioException(String
+					.format("produto com id %d não está associado ao restaurante com id %d", produtoId, restauranteId));
+		}
+		return produto;
 	}
 }
