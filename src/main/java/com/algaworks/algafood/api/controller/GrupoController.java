@@ -38,7 +38,7 @@ public class GrupoController {
 	
 	@GetMapping
 	public List<GrupoModel> listar() {
-		return grupoModelAssembler.toCollectModel(service.listar());
+		return grupoModelAssembler.toCollectionModel(service.listar());
 	}
 	
 	@GetMapping("/{grupoId}")
