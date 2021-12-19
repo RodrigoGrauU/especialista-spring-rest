@@ -10,7 +10,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.algaworks.algafood.domain.exception.GrupoNaoEncontradoException;
 import com.algaworks.algafood.domain.exception.NegocioException;
+import com.algaworks.algafood.domain.exception.PermissaoNaoEncontradoException;
 import com.algaworks.algafood.domain.model.Grupo;
+import com.algaworks.algafood.domain.model.Permissao;
 import com.algaworks.algafood.domain.repository.GrupoRepository;
 
 @Service
@@ -20,6 +22,9 @@ public class CadastroGrupoService {
 	
 	@Autowired
 	private GrupoRepository repository;
+	
+	@Autowired
+	private CadastroPermissaoService cadastroPermissaoService;
 	
 	public List<Grupo> listar() {
 		return repository.findAll();
@@ -52,4 +57,24 @@ public class CadastroGrupoService {
 		}
 	}
 
+	@Transactional
+	public void associarPermissao(Long grupoId, Long permissaoId) {
+		Grupo grupo = buscarOuFalhar(grupoId);
+		Permissao permissao = cadastroPermissaoService.buscarOuFalhar(permissaoId);
+		
+		grupo.adicionarPermissao(permissao);
+	}
+
+	@Transactional
+	public void desassociarPermissao(Long grupoId, Long permissaoId) {
+		Grupo grupo = buscarOuFalhar(grupoId);
+		Permissao permissao = cadastroPermissaoService.buscarOuFalhar(permissaoId);
+		
+		grupo.removerPermissao(permissao);
+	}
+
+	public Permissao buscarPermissao(Long grupoId, Long permissaoId) {
+		return repository.findByPermissao(grupoId, permissaoId).orElseThrow(() ->
+		new PermissaoNaoEncontradoException(String.format("Permissão com id %d não encontrada para grupo %d", permissaoId, grupoId)));
+	}
 }
