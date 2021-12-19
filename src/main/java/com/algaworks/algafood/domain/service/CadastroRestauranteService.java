@@ -63,6 +63,24 @@ public class CadastroRestauranteService {
 	}
 	
 	@Transactional
+	public void ativar(List<Long> restauranteIds) {
+		try {
+			restauranteIds.forEach(this::ativar);
+		} catch (RestauranteNaoEncontradoException e) {
+			throw new NegocioException(e.getMessage(), e);
+		}
+	}
+	
+	@Transactional
+	public void inativar(List<Long> restauranteIds) {
+		try {
+			restauranteIds.forEach(this::inativar);
+		} catch (RestauranteNaoEncontradoException e) {
+			throw new NegocioException(e.getMessage(), e);
+		}
+	}
+	
+	@Transactional
 	public void desassociarFormaPagamento(Long restauranteId, Long formaPagamentoId) {
 		Restaurante restaurante =  buscarOuFalhar(restauranteId);
 		FormaPagamento formaPagamento = cadastroFormaPagamento.buscarOuFalhar(formaPagamentoId);
