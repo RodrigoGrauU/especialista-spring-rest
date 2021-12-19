@@ -88,6 +88,8 @@ public class Restaurante {
 	
 	private Boolean ativo = Boolean.TRUE;
 	
+	private Boolean aberto = Boolean.FALSE;
+	
 	public void ativar() {
 		setAtivo(true);
 	}
@@ -103,7 +105,12 @@ public class Restaurante {
 	public boolean desassociarFormaPagamento(FormaPagamento formaPagamento) {
 		return formasPagamento.remove(formaPagamento);
 	}
-	
-	
-	
+
+	public void fechar() {
+		setAberto(false);
+	}
+
+	public void abrir() {
+		setAberto(true);
+	}
 }
