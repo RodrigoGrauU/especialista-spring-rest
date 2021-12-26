@@ -13,9 +13,12 @@ public class PedidoSpecs {
 	
 	public static Specification<Pedido> usandoFiltro(PedidoFilter filtro) {
 		return (root, query, builder) -> {
-			//resolve problema do n+1 nas consultas
-			root.fetch("restaurante").fetch("cozinha");
-			root.fetch("cliente");
+			//evita fazer o fetch quando houver count (paginacao)
+			if (Pedido.class.equals(query.getResultType())) {
+				//resolve problema do n+1 nas consultas
+				root.fetch("restaurante").fetch("cozinha");
+				root.fetch("cliente");
+		    }
 			
 			var predicates = new ArrayList<Predicate>();
 			
