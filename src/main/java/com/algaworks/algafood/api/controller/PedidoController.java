@@ -27,6 +27,7 @@ import com.algaworks.algafood.api.assembler.PedidoResumoModelAssembler;
 import com.algaworks.algafood.api.model.PedidoModel;
 import com.algaworks.algafood.api.model.PedidoResumoModel;
 import com.algaworks.algafood.api.model.input.PedidoInput;
+import com.algaworks.algafood.core.data.PageableTranslator;
 import com.algaworks.algafood.domain.exception.EntidadeNaoEncontradaException;
 import com.algaworks.algafood.domain.exception.NegocioException;
 import com.algaworks.algafood.domain.model.Pedido;
@@ -35,6 +36,7 @@ import com.algaworks.algafood.domain.repository.PedidoRepository;
 import com.algaworks.algafood.domain.repository.filter.PedidoFilter;
 import com.algaworks.algafood.domain.service.EmissaoPedidoService;
 import com.algaworks.algafood.infrastructure.repository.spec.PedidoSpecs;
+import com.google.common.collect.ImmutableMap;
 //import com.fasterxml.jackson.databind.ser.impl.SimpleBeanPropertyFilter;
 //import com.fasterxml.jackson.databind.ser.impl.SimpleFilterProvider;
 
@@ -79,10 +81,12 @@ public class PedidoController {
     @GetMapping
     public Page<PedidoResumoModel> pesquisar(PedidoFilter filtro, 
             @PageableDefault(size = 10) Pageable pageable) {
-        Page<Pedido> pedidosPage = pedidoRepository.findAll(
-                PedidoSpecs.usandoFiltro(filtro), pageable);
+		pageable = traduzirPageable(pageable);
         
-        List<PedidoResumoModel> pedidosResumoModel = pedidoResumoModelAssembler
+		Page<Pedido> pedidosPage = pedidoRepository.findAll(
+				PedidoSpecs.usandoFiltro(filtro), pageable);
+		
+		List<PedidoResumoModel> pedidosResumoModel = pedidoResumoModelAssembler
                 .toCollectionModel(pedidosPage.getContent());
         
         Page<PedidoResumoModel> pedidosResumoModelPage = new PageImpl<>(
@@ -91,7 +95,7 @@ public class PedidoController {
         return pedidosResumoModelPage;
     }
     
-    @GetMapping("/{codigoPedido}")
+	@GetMapping("/{codigoPedido}")
     public PedidoModel buscar(@PathVariable String codigoPedido) {
         Pedido pedido = emissaoPedido.buscarOuFalhar(codigoPedido);
         
@@ -115,4 +119,15 @@ public class PedidoController {
             throw new NegocioException(e.getMessage(), e);
         }
     }
+    
+    private Pageable traduzirPageable(Pageable apiPageable) {
+		var mapeamento = ImmutableMap.of(
+				"codigo", "codigo",
+				"restaurante.nome", "restaurante.nome",
+				"nomeCliente", "cliente.nome",
+				"valorTotal", "valorTotal"
+			);
+		
+		return PageableTranslator.translate(apiPageable, mapeamento);
+	}
 } 
