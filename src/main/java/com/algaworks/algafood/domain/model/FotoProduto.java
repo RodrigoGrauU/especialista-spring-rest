@@ -1,6 +1,7 @@
 package com.algaworks.algafood.domain.model;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.MapsId;
@@ -11,6 +12,7 @@ import lombok.EqualsAndHashCode;
 
 @Data
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@Entity
 public class FotoProduto {
 
 	@EqualsAndHashCode.Include
@@ -23,7 +25,7 @@ public class FotoProduto {
 	private Produto produto;
 	
 	private String nomeArquivo;
-	private String desricao;
+	private String descricao;
 	private String contentType;
 	private Long tamanho;
 }
