@@ -4,6 +4,7 @@ import java.util.Set;
 
 import lombok.Builder;
 import lombok.Getter;
+import lombok.Singular;
 
 public interface EnvioEmailService {
 
@@ -13,6 +14,7 @@ public interface EnvioEmailService {
 	@Builder
 	class Mensagem {
 		
+		@Singular
 		private Set<String> destinatarios;
 		private String assunto;
 		private String corpo;
