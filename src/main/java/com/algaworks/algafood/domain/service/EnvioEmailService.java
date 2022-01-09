@@ -11,7 +11,7 @@ import lombok.Singular;
 
 public interface EnvioEmailService {
 
-	void Enviar(Mensagem mensagem);
+	void enviar(Mensagem mensagem);
 	
 	@Getter
 	@Builder

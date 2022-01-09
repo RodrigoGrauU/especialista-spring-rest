@@ -28,7 +28,7 @@ public class FluxoPedidoService {
 				.destinatario(pedido.getCliente().getEmail())
 				.build();
 				
-		envioEmailService.Enviar(mensagem);
+		envioEmailService.enviar(mensagem);
 	}
 	
 	@Transactional
