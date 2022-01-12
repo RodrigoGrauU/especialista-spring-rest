@@ -1,4 +1,4 @@
-package com.algaworks.algafood.core.emal;
+package com.algaworks.algafood.core.email;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;

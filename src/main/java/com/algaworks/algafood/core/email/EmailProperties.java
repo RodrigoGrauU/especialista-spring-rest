@@ -1,4 +1,4 @@
-package com.algaworks.algafood.core.emal;
+package com.algaworks.algafood.core.email;
 
 import javax.validation.constraints.NotNull;
 
