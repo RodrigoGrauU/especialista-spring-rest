@@ -6,7 +6,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.algaworks.algafood.domain.model.Pedido;
 import com.algaworks.algafood.domain.repository.PedidoRepository;
-import com.algaworks.algafood.domain.service.EnvioEmailService.Mensagem;
 
 @Service
 public class FluxoPedidoService {
@@ -30,6 +29,8 @@ public class FluxoPedidoService {
 	public void cancelar(String codigoPedido) {
 	    Pedido pedido = emissaoPedido.buscarOuFalhar(codigoPedido);
 	    pedido.cancelar();
+	    
+	    repository.save(pedido);
 	}
 
 	@Transactional
