@@ -73,4 +73,12 @@ public class FormaPagamentoController {
 	public void remover(@PathVariable Long formaPagamentoId) {
 		service.excluir(formaPagamentoId);
 	}
+	
+	@GetMapping("/{formaPagamentoId}")
+	public ResponseEntity<FormaPagamentoModel> buscar(@PathVariable Long formaPagamentoId) {
+		FormaPagamento formaPagamento = service.buscarOuFalhar(formaPagamentoId);
+		return ResponseEntity.ok()
+				.cacheControl(CacheControl.maxAge(10, TimeUnit.SECONDS))
+				.body(formaPagamentoModelAssembler.toModel(formaPagamento));
+	}
 }
