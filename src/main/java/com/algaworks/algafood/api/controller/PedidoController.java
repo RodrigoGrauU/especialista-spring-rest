@@ -1,6 +1,7 @@
 package com.algaworks.algafood.api.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.validation.Valid;
 
@@ -36,7 +37,7 @@ import com.algaworks.algafood.domain.repository.PedidoRepository;
 import com.algaworks.algafood.domain.filter.PedidoFilter;
 import com.algaworks.algafood.domain.service.EmissaoPedidoService;
 import com.algaworks.algafood.infrastructure.repository.spec.PedidoSpecs;
-import com.google.common.collect.ImmutableMap;
+//import com.google.common.collect.ImmutableMap;
 //import com.fasterxml.jackson.databind.ser.impl.SimpleBeanPropertyFilter;
 //import com.fasterxml.jackson.databind.ser.impl.SimpleFilterProvider;
 
@@ -121,7 +122,7 @@ public class PedidoController {
     }
     
     private Pageable traduzirPageable(Pageable apiPageable) {
-		var mapeamento = ImmutableMap.of(
+		var mapeamento = Map.of(
 				"codigo", "codigo",
 				"restaurante.nome", "restaurante.nome",
 				"nomeCliente", "cliente.nome",
