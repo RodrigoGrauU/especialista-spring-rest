@@ -57,7 +57,7 @@ public class GrupoController implements GrupoControllerOpenApi {
 	}
 	
 	@PutMapping("/{grupoId}")
-	public GrupoModel alterar(@PathVariable Long grupoId, @RequestBody @Valid GrupoInput grupoInput) {
+	public GrupoModel atualizar(@PathVariable Long grupoId, @RequestBody @Valid GrupoInput grupoInput) {
 		Grupo grupo = service.buscarOuFalhar(grupoId);
 		grupoInputDesassembler.copyToDomainObject(grupoInput, grupo);
 		grupo = service.alterar(grupo);
