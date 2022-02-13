@@ -14,8 +14,8 @@ public class WebConfig implements WebMvcConfigurer {
 	@Override
 	public void addCorsMappings(CorsRegistry registry) {
 		registry.addMapping("/**")
-		.allowedMethods("*");
-//		.allowedOrigins("*") //permite especificar as origens
+		.allowedMethods("*")
+		.allowedOrigins("*"); //permite especificar as origens
 //		.maxAge(30); //configuracao do tempo de cache do prelight
 	}
 	
