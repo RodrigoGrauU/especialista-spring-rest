@@ -5,17 +5,23 @@ import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.hateoas.server.mvc.RepresentationModelAssemblerSupport;
 import org.springframework.stereotype.Component;
 
+import com.algaworks.algafood.api.controller.PedidoController;
 import com.algaworks.algafood.api.model.PedidoResumoModel;
 import com.algaworks.algafood.domain.model.Pedido;
 
 @Component
-public class PedidoResumoModelAssembler {
+public class PedidoResumoModelAssembler extends RepresentationModelAssemblerSupport<Pedido, PedidoResumoModel> {
 
-    @Autowired
+	@Autowired
     private ModelMapper modelMapper;
-    
+
+	public PedidoResumoModelAssembler() {
+		super(PedidoController.class, PedidoResumoModel.class);
+	}
+	
     public PedidoResumoModel toModel(Pedido pedido) {
         return modelMapper.map(pedido, PedidoResumoModel.class);
     }
