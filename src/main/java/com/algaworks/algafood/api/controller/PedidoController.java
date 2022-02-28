@@ -122,14 +122,14 @@ public class PedidoController implements PedidoControllerOpenApi {
     
     private Pageable traduzirPageable(Pageable apiPageable) {
 		var mapeamento = Map.of(
-				"codigo", "codigo",
-				"subtotal", "subtotal",
-				"taxaFrete", "taxaFrete",
-				"valorTotal", "valorTotal",
-				"dataCriacao", "dataCriacao",
-				"nomerestaurante", "restaurante.nome",
-				"restaurante.id", "restaurante.id",
-				"cliente.id", "cliente.id",
+				"codigo", "codigo", 
+				"subtotal", "subtotal", 
+				"taxaFrete", "taxaFrete", 
+				"valorTotal", "valorTotal", 
+				"dataCriacao", "dataCriacao", 
+				"restaurante.nome", "restaurante.nome", 
+				"restaurante.id", "restaurante.id", 
+				"cliente.id", "cliente.id", 
 				"cliente.nome", "cliente.nome"
 			);
 		
