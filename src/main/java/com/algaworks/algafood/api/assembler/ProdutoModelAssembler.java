@@ -29,7 +29,7 @@ public class ProdutoModelAssembler extends RepresentationModelAssemblerSupport<P
 		ProdutoModel produtoModel = createModelWithId(produto.getId(), produto, produto.getRestaurante().getId());
 		modelMapper.map(produto, produtoModel);
 		
-		produtoModel.add(algaLinks.linkToProdutos(produto.getRestaurante().getId(), "restaurantes"));
+		produtoModel.add(algaLinks.linkToProdutos(produto.getRestaurante().getId(), "produtos"));
 		
 		produtoModel.add(algaLinks.linkToFotoProduto(produto.getRestaurante().getId(), produto.getId(), "foto"));
 		
