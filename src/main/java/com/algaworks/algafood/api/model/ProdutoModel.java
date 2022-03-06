@@ -9,7 +9,7 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
 import lombok.Setter;
 
-@Relation("produtos")
+@Relation(collectionRelation = "produtos")
 @Getter
 @Setter
 public class ProdutoModel extends RepresentationModel<ProdutoModel> {
