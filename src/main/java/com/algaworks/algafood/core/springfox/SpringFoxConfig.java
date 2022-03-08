@@ -14,6 +14,7 @@ import org.springframework.context.annotation.Import;
 import org.springframework.core.io.Resource;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.Links;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -22,12 +23,15 @@ import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import com.algaworks.algafood.api.exceptionhandler.Problem;
+import com.algaworks.algafood.api.model.CidadeModel;
 import com.algaworks.algafood.api.model.CozinhaModel;
 import com.algaworks.algafood.api.model.PedidoResumoModel;
+import com.algaworks.algafood.api.openapi.model.CidadesModelOpenApi;
 import com.algaworks.algafood.api.openapi.model.CozinhasModelOpenApi;
 import com.algaworks.algafood.api.openapi.model.LinksModelOpenApi;
 import com.algaworks.algafood.api.openapi.model.PageableModelOpenApi;
 import com.algaworks.algafood.api.openapi.model.PedidosResumoModelOpenApi;
+import com.algaworks.algafood.domain.model.Cidade;
 import com.fasterxml.classmate.TypeResolver;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
@@ -85,6 +89,9 @@ public class SpringFoxConfig implements WebMvcConfigurer {
 			        .alternateTypeRules(AlternateTypeRules.newRule(
 		                    typeResolver.resolve(Page.class, PedidoResumoModel.class),
 		                    PedidosResumoModelOpenApi.class))
+			        .alternateTypeRules(AlternateTypeRules.newRule(
+			        		typeResolver.resolve(CollectionModel.class, CidadeModel.class), 
+			        		CidadesModelOpenApi.class))
 //			        .globalRequestParameters(Collections.singletonList(
 //			                new RequestParameterBuilder()
 //			                        .name("campos")
