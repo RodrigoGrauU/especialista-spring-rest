@@ -27,14 +27,15 @@ import com.algaworks.algafood.api.exceptionhandler.Problem;
 import com.algaworks.algafood.api.model.CidadeModel;
 import com.algaworks.algafood.api.model.CozinhaModel;
 import com.algaworks.algafood.api.model.EstadoModel;
+import com.algaworks.algafood.api.model.FormaPagamentoModel;
 import com.algaworks.algafood.api.model.PedidoResumoModel;
 import com.algaworks.algafood.api.openapi.model.CidadesModelOpenApi;
 import com.algaworks.algafood.api.openapi.model.CozinhasModelOpenApi;
 import com.algaworks.algafood.api.openapi.model.EstadosModelOpenApi;
+import com.algaworks.algafood.api.openapi.model.FormasPagamentoModelOpenApi;
 import com.algaworks.algafood.api.openapi.model.LinksModelOpenApi;
 import com.algaworks.algafood.api.openapi.model.PageableModelOpenApi;
 import com.algaworks.algafood.api.openapi.model.PedidosResumoModelOpenApi;
-import com.algaworks.algafood.domain.model.Cidade;
 import com.fasterxml.classmate.TypeResolver;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
@@ -98,6 +99,9 @@ public class SpringFoxConfig implements WebMvcConfigurer {
 			        .alternateTypeRules(AlternateTypeRules.newRule(
 			                typeResolver.resolve(CollectionModel.class, EstadoModel.class),
 			                EstadosModelOpenApi.class))
+			        .alternateTypeRules(AlternateTypeRules.newRule(
+			        	    typeResolver.resolve(CollectionModel.class, FormaPagamentoModel.class),
+			        	    FormasPagamentoModelOpenApi.class))
 //			        .globalRequestParameters(Collections.singletonList(
 //			                new RequestParameterBuilder()
 //			                        .name("campos")
