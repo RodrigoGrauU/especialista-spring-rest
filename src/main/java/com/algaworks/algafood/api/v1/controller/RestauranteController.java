@@ -37,7 +37,7 @@ import com.algaworks.algafood.domain.service.CadastroRestauranteService;
 //import com.fasterxml.jackson.annotation.JsonView;
 
 @RestController
-@RequestMapping("/restaurantes")
+@RequestMapping("/v1/restaurantes")
 public class RestauranteController implements RestauranteControllerOpenApi {
 
 	@Autowired
