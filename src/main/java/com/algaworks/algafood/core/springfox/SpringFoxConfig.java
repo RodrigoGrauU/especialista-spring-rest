@@ -78,8 +78,8 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @Import(BeanValidatorPluginsConfiguration.class)	
 public class SpringFoxConfig implements WebMvcConfigurer {
 
-	
-	@Bean
+//Comentário no @Bean para remover o versão da documentação	
+//	@Bean
 	public Docket apiDocketV1() {
 		var typeResolver = new TypeResolver();
 		
