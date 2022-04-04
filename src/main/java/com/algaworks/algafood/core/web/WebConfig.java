@@ -26,7 +26,8 @@ public class WebConfig implements WebMvcConfigurer {
 	
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
-		registry.addInterceptor(apiRetirementHandler);
+		//o código a seguir inativa a versão 1 da API
+//		registry.addInterceptor(apiRetirementHandler);
 	}
 	
 	@Bean

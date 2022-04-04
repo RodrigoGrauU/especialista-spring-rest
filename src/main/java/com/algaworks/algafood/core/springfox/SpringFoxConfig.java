@@ -79,7 +79,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 public class SpringFoxConfig implements WebMvcConfigurer {
 
 //Comentário no @Bean para remover o versão da documentação	
-//	@Bean
+	@Bean
 	public Docket apiDocketV1() {
 		var typeResolver = new TypeResolver();
 		
