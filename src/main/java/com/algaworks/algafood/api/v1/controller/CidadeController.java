@@ -49,7 +49,9 @@ public class CidadeController implements CidadeControllerOpenApi {
 	
 	@Autowired
 	CidadeInputDisassembler cidadeInputDisassembler;
-	
+
+//	Uma forma de informar que o método é depreciado
+	@Deprecated
 	@GetMapping
 	@ResponseStatus(HttpStatus.OK)
 	public CollectionModel<CidadeModel> listar() {
