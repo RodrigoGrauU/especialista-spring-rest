@@ -33,6 +33,8 @@ import com.fasterxml.jackson.databind.JsonMappingException.Reference;
 import com.fasterxml.jackson.databind.exc.InvalidFormatException;
 import com.fasterxml.jackson.databind.exc.PropertyBindingException;
 
+import lombok.extern.slf4j.Slf4j;
+@Slf4j
 @ControllerAdvice
 public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
 
@@ -254,11 +256,7 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
 		ProblemType problemType = ProblemType.ERRO_DE_SISTEMA;
 		String detail = "Ocorreu um erro interno inesperado no sistema. Tente novamente e se o problema persistir, entre"
 				+ "em contato com o administrador do sistema";
-		// Importante colocar o printStackTrace (pelo menos por enquanto, que não estamos
-	    // fazendo logging) para mostrar a stacktrace no console
-	    // Se não fizer isso, você não vai ver a stacktrace de exceptions que seriam importantes
-	    // para você durante, especialmente na fase de desenvolvimento
-		ex.printStackTrace();
+		log.error(ex.getMessage(), ex);
 		
 		Problem problem = createProblemBuilder(status, problemType, detail)
 				.userMessage(MSG_ERRO_GENERICA_USUARIO_FINAL)
