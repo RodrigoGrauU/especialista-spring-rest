@@ -117,7 +117,7 @@ insert into usuario (id, nome, email, senha, data_cadastro) values
 (4, 'Sebastião Martins', 'sebastiao.cad@algafood.com', '$2a$12$j6EPixzWx5u2mKs1Bi6WKus.v9GyYGobmTxHAVY/FlTguP8J04SMW', utc_timestamp),
 (6,	'Pedro Jorge', 'graugames@gmail.com', '$2a$12$j6EPixzWx5u2mKs1Bi6WKus.v9GyYGobmTxHAVY/FlTguP8J04SMW', utc_timestamp);
 
-insert into usuario_grupo (usuario_id, grupo_id) values (1, 1), (1, 2), (2, 2);
+insert into usuario_grupo (usuario_id, grupo_id) values (1, 1), (1, 2), (2, 2), (3, 3), (4, 4);
 
 insert into usuario (id, nome, email, senha, data_cadastro) values
 (5, 'Manoel Lima', 'manoel.loja@gmail.com', '$2a$12$j6EPixzWx5u2mKs1Bi6WKus.v9GyYGobmTxHAVY/FlTguP8J04SMW', utc_timestamp);
