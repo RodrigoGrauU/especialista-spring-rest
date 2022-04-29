@@ -10,7 +10,8 @@ public enum ProblemType {
 	ERRO_NEGOCIO("/erro-negocio", "Violação da regra de negócio"), 
 	ENTIDADE_EM_USO("/entidade-em-uso", "Entidade em uso"), 
 	ERRO_DE_SISTEMA("/erro-de-sistema", "Erro de sistema"), 
-	DADOS_INVALIDOS("/dados-invalidos", "Dados inválidos");
+	DADOS_INVALIDOS("/dados-invalidos", "Dados inválidos"),
+	ACESSO_NEGADO("/acesso-negado", "Acesso negado");
 	
 	private String path;
 	private String title;
