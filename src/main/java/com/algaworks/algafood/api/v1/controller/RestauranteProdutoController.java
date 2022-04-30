@@ -24,6 +24,7 @@ import com.algaworks.algafood.api.v1.assembler.ProdutoModelAssembler;
 import com.algaworks.algafood.api.v1.model.ProdutoModel;
 import com.algaworks.algafood.api.v1.model.input.ProdutoInput;
 import com.algaworks.algafood.api.v1.openapi.controller.RestauranteProdutoControllerOpenApi;
+import com.algaworks.algafood.core.security.CheckSecurity;
 import com.algaworks.algafood.domain.model.Produto;
 import com.algaworks.algafood.domain.model.Restaurante;
 import com.algaworks.algafood.domain.repository.ProdutoRepository;
@@ -52,6 +53,7 @@ public class RestauranteProdutoController implements RestauranteProdutoControlle
 	@Autowired
 	private AlgaLinks algaLinks;
 	
+	@CheckSecurity.Restaurantes.PodeConsultar
 	@Override
 	@GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public CollectionModel<ProdutoModel> listar(@PathVariable Long restauranteId, 
@@ -69,6 +71,7 @@ public class RestauranteProdutoController implements RestauranteProdutoControlle
         		.add(algaLinks.linkToProdutos(restauranteId));
     }
 	
+	@CheckSecurity.Restaurantes.PodeConsultar
 	@Override
 	@GetMapping(value = "/{produtoId}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ProdutoModel buscar(@PathVariable Long restauranteId, @PathVariable Long produtoId) {
@@ -77,6 +80,7 @@ public class RestauranteProdutoController implements RestauranteProdutoControlle
         return produtoModelAssembler.toModel(produto);
     }
 	
+	@CheckSecurity.Restaurantes.PodeEditar
 	@Override
 	@PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.CREATED)
@@ -92,6 +96,7 @@ public class RestauranteProdutoController implements RestauranteProdutoControlle
         return produtoModelAssembler.toModel(produto);
     }
     
+	@CheckSecurity.Restaurantes.PodeEditar
 	@Override
     @PutMapping(value = "/{produtoId}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ProdutoModel atualizar(@PathVariable Long restauranteId, @PathVariable Long produtoId,
