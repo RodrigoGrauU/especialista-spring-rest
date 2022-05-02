@@ -53,7 +53,7 @@ public class RestauranteProdutoFotoController implements RestauranteProdutoFotoC
 	@Autowired
 	private FotoStorageService fotoStorage;
 
-	@CheckSecurity.Restaurantes.PodeEditar
+	@CheckSecurity.Restaurantes.PodeGerenciarFuncionamento
 	@Override()
 	@PutMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
 	public FotoProdutoModel atualizarFoto(@PathVariable Long restauranteId,
@@ -77,7 +77,7 @@ public class RestauranteProdutoFotoController implements RestauranteProdutoFotoC
 		return fotoProdutoModelAssembler.toModel(fotoSalva);
 	}
 
-	@CheckSecurity.Restaurantes.PodeEditar
+	@CheckSecurity.Restaurantes.PodeGerenciarFuncionamento
 	@Override
 	@DeleteMapping
 	@ResponseStatus(HttpStatus.NO_CONTENT)
@@ -86,6 +86,7 @@ public class RestauranteProdutoFotoController implements RestauranteProdutoFotoC
 		catalogoFotoProduto.excluir(restauranteId, produtoId);
 	}
 
+	@CheckSecurity.Restaurantes.PodeConsultar
 	@Override
 	@GetMapping()
 	public FotoProdutoModel buscar(@PathVariable Long restauranteId,

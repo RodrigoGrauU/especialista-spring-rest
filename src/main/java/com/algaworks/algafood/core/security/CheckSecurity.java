@@ -23,11 +23,17 @@ public @interface CheckSecurity {
 	}
 	
 	public @interface Restaurantes {
-
-	    @PreAuthorize("hasAuthority('SCOPE_WRITE') and hasAuthority('EDITAR_RESTAURANTES')")
+		@PreAuthorize("hasAuthority('SCOPE_WRITE') and "
+				+ "hasAuthority('EDITAR_RESTAURANTES') or "
+				+ "@algaSecurity.gerenciaRestaurante(#restauranteId)") //o @ acessa o bean e o # acessa a variavel
 	    @Retention(RetentionPolicy.RUNTIME)
 	    @Target(ElementType.METHOD)
-	    public @interface PodeEditar { }
+	    public @interface PodeGerenciarFuncionamento {}
+		
+		@PreAuthorize("hasAuthority('SCOPE_WRITE') and hasAuthority('EDITAR_RESTAURANTES')")
+	    @Retention(RetentionPolicy.RUNTIME)
+	    @Target(ElementType.METHOD)
+	    public @interface PodeGerenciarCadastro { }
 
 	    @PreAuthorize("hasAuthority('SCOPE_READ') and isAuthenticated()")
 	    @Retention(RetentionPolicy.RUNTIME)

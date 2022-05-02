@@ -35,4 +35,6 @@ public interface RestauranteRepository extends JpaRepository<Restaurante, Long>,
 	
 	Optional<Restaurante> consultaPorNome(@Param("nome") String nome, @Param("id") Long idCozinha);
 	
+	boolean existsResponsavel(Long restauranteId, Long usuarioId);
+	
 }
