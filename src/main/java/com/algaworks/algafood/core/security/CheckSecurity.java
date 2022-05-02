@@ -5,6 +5,7 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
+import org.springframework.security.access.prepost.PostAuthorize;
 import org.springframework.security.access.prepost.PreAuthorize;
 
 public @interface CheckSecurity {
@@ -40,5 +41,17 @@ public @interface CheckSecurity {
 	    @Target(ElementType.METHOD)
 	    public @interface PodeConsultar { }
 	    
+	}
+	
+	public @interface Pedidos {
+			
+		@PreAuthorize("hasAuthority('SCOPE_READ') and isAuthenticated()")
+		@PostAuthorize("hasAuthority('CONSULTAR_PEDIDOS') or " 	//post executa apos a chamada do metodo
+				+ "@algaSecurity.getUsuarioId() == returnObject.cliente.id or "
+				+ "@algaSecurity.gerenciaRestaurante(returnObject.restaurante.id)") //returnObject referencia o objeto de retorno do metodo anotado
+		@Retention(RetentionPolicy.RUNTIME)
+		@Target(ElementType.METHOD)
+		public @interface PodeBuscar { }
+		
 	}
 }
