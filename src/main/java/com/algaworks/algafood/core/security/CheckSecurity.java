@@ -86,4 +86,32 @@ public @interface CheckSecurity {
 	    public @interface PodeConsultar { }
 	    
 	}
+	
+	public @interface Cidades {
+
+	    @PreAuthorize("hasAuthority('SCOPE_WRITE') and hasAuthority('EDITAR_CIDADES')")
+	    @Retention(RetentionPolicy.RUNTIME)
+	    @Target(ElementType.METHOD)
+	    public @interface PodeEditar { }
+
+	    @PreAuthorize("hasAuthority('SCOPE_READ') and isAuthenticated()")
+	    @Retention(RetentionPolicy.RUNTIME)
+	    @Target(ElementType.METHOD)
+	    public @interface PodeConsultar { }
+	    
+	}
+
+	public @interface Estados {
+	    
+	    @PreAuthorize("hasAuthority('SCOPE_WRITE') and hasAuthority('EDITAR_ESTADOS')")
+	    @Retention(RetentionPolicy.RUNTIME)
+	    @Target(ElementType.METHOD)
+	    public @interface PodeEditar { }
+
+	    @PreAuthorize("hasAuthority('SCOPE_READ') and isAuthenticated()")
+	    @Retention(RetentionPolicy.RUNTIME)
+	    @Target(ElementType.METHOD)
+	    public @interface PodeConsultar { }
+	    
+	}
 }
