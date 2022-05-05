@@ -152,7 +152,7 @@ public class AlgaLinks {
 		return linkTo(methodOn(FluxoPedidoController.class).confirmar(codigoPedido)).withRel(rel);
 	}
 
-	public Link linkToEntragaPedido(String codigoPedido, String rel) {
+	public Link linkToEntregaPedido(String codigoPedido, String rel) {
 		return linkTo(methodOn(FluxoPedidoController.class).entregar(codigoPedido)).withRel(rel);
 	}
 
