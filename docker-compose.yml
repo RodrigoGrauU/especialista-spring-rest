@@ -14,6 +14,12 @@ services:
     networks:
       - algafood-network
 
+  algafood-redis:
+    image: redis:6.2.1-alpine
+    networks:
+      - algafood-network
+    
+
   algafood-api:
     image: algafood-api
     #substitui o CMD no Dockerfile. -t especifica o timeout e antes disso vem a identificacao do servico:porta
