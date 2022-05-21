@@ -27,6 +27,7 @@
 		<spring-security-oauth2.version>2.3.8.RELEASE</spring-security-oauth2.version>
 		<spring-security-jwt.version>1.0.11.RELEASE</spring-security-jwt.version>
 		<dockerfile-maven-version>1.4.13</dockerfile-maven-version>
+		<aws-java-sdk-s3.version>1.11.671</aws-java-sdk-s3.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -121,6 +122,12 @@
 <!-- 		  <version>${guava.version}</version> -->
 <!-- 	  	</dependency> -->
 		
+		<dependency>
+			<groupId>com.amazonaws</groupId>
+			<artifactId>aws-java-sdk-s3</artifactId>
+			<version>${aws-java-sdk-s3.version}</version>
+		</dependency>
+	
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-mail</artifactId>
